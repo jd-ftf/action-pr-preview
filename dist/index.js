@@ -10811,7 +10811,12 @@ exports.showStat = async function showStat(remoteURL, branch, force) {
 exports.push = async function push(remoteURL, branch) {
   const args = [];
   args.push('push', remoteURL, branch);
-  return await exec('git', args);
+  return await exec('git', args).then((res) => {
+    if (!res.success) {
+      throw new Error(res.stderr);
+    }
+    return res.stdout.trim().length > 0;
+  });;
 }
 
 
@@ -11015,11 +11020,12 @@ async function run () {
   try {
     const domain = core.getInput('domain') || 'github.com';
     const repo = core.getInput('repo') || process.env['GITHUB_REPOSITORY'];
+    const currentRepo = process.env['GITHUB_REPOSITORY'];
     const targetBranch = core.getInput('target_branch') || 'gh-pages';
     const author = core.getInput('author') || 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>';
     const commiter = core.getInput('commiter') || 'GitHub <noreply@github.com>';
     const docsDir = core.getInput('docs_dir');
-    const previewDir = core.getInput('preview_dir') || (process.env['GH_PAT'] ? `preview/${repo}/` : 'preview/');
+    const previewDir = core.getInput('preview_dir') || (process.env['GH_PAT'] ? `preview/${currentRepo.split('/')[1]}/` : 'preview/');
     const storeNum = parseInt(core.getInput('store_num'));
     const verbose = core.getBooleanInput('verbose');
     const prId = github.context.payload.number;
@@ -11032,7 +11038,7 @@ async function run () {
     let remoteUrl = String('https://');
     if (process.env['GH_PAT']) {
       core.debug('Use Personal Access Token to manage repository');
-      remoteUrl = remoteUrl.concat(process.env['gh_PAT'].trim(), '@');
+      remoteUrl = remoteUrl.concat(process.env['GH_PAT'].trim(), '@');
     } else if (process.env['GITHUB_TOKEN']) {
       core.debug('Use Github Token to manage repository(not pass when a workflow is triggered from a forked repository)');
       remoteUrl = remoteUrl.concat('x-access-token:', process.env['GITHUB_TOKEN'].trim(), '@');

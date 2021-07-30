@@ -76,5 +76,10 @@ exports.showStat = async function showStat(remoteURL, branch, force) {
 exports.push = async function push(remoteURL, branch) {
   const args = [];
   args.push('push', remoteURL, branch);
-  return await exec('git', args);
+  return await exec('git', args).then((res) => {
+    if (!res.success) {
+      throw new Error(res.stderr);
+    }
+    return res.stdout.trim().length > 0;
+  });;
 }

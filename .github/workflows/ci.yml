@@ -21,8 +21,8 @@ jobs:
       - name: Deploy Preview Docs
         uses: ./
         with:
-          target_branch: gh-pages
           docs_dir: docs/
+          repo: jd-ftf/pr-preview
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PAT: ${{ secrets.PAT }}
 
