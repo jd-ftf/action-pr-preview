@@ -1,0 +1,28 @@
+
+name: ci
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install node
+        uses: actions/setup-node@v2
+      
+      - name: Deploy Preview Docs
+        uses: ./
+        with:
+          target_branch: gh-pages
+          docs_dir: docs/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

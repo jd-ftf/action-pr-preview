@@ -6,12 +6,12 @@ exports.remoteBranchExists = async function remoteBranchExists(remoteUrl, branch
       throw new Error(res.stderr);
     }
 
-    return res.stdout.length.trim() > 0;
+    return res.stdout.trim().length > 0;
   });
 }
 
 exports.clone = async function clone(remoteUrl, branch, dest) {
-  return await exec('git', ['--quiet', '--branch', branch, '--depth', '1', remoteUrl, dest], true);
+  return await exec('git', ['clone', '--quiet', '--branch', branch, '--depth', '1', remoteUrl, dest], true);
 }
 
 exports.init = async function init(dest) {
@@ -27,7 +27,7 @@ exports.isDirty = async function isDirty() {
     if (!res.success) {
       throw new Error(res.stderr);
     }
-    return res.stdout.length.trim() > 0;
+    return res.stdout.trim().length > 0;
   });
 }
 
