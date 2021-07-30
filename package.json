@@ -1,0 +1,30 @@
+{
+  "name": "action-pr-preview",
+  "version": "0.0.1",
+  "description": "Github Action to deploy previewed site to Github Pages for Pull Request",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jd-ftf/action-pr-preview.git"
+  },
+  "keywords": [
+    "action",
+    "gh-pages",
+    "preview"
+  ],
+  "author": "yawuling",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jd-ftf/action-pr-preview/issues"
+  },
+  "homepage": "https://github.com/jd-ftf/action-pr-preview#readme",
+  "dependencies": {
+    "@actions/core": "^1.4.0",
+    "@actions/exec": "^1.1.0",
+    "addressparser": "^1.0.1",
+    "fs-extra": "^10.0.0"
+  }
+}

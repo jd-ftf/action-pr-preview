@@ -1,0 +1,43 @@
+# https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
+name: 'Pull Request Preview(gh-pages)'
+description: 'Github Action to deploy previewed site to Github Pages for Pull Request'
+author: 'yawuling'
+branding:
+  color: 'blue'
+  icon: 'eye'
+
+inputs:
+  domain:
+    descripton: 'Git domain (default github.com)'
+    required: false
+    default: 'github.com'
+  repo:
+    description: 'Github repository where assets will be deployed (default $GITHUB_REPOSITORY)'
+    required: false
+  target_branch:
+    description: 'Git branch where assets will be deployed'
+    default: 'gh-pages'
+    required: false
+  author:
+    description: 'The author name and email address'
+    required: false
+  commiter:
+    description: 'The commiter name and email address'
+    required: false
+  docs_dir:
+    description: 'Docs directory to deploy'
+    required: true
+  preview_dir:
+    description: 'Docs directory to preview'
+    required: false
+  store_num:
+    description: 'Lastest num of preview docs to store'
+    required: false
+    default: '50'
+  verbose:
+    description: 'Enable verbose output'
+    required: false
+    default: false
+runs:
+  using: 'node12'
+  main: 'src/index.js'
