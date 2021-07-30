@@ -11032,7 +11032,7 @@ async function run () {
     let remoteUrl = String('https://');
     if (process.env['GH_PAT']) {
       core.debug('Use Personal Access Token to manage repository');
-      remoteUrl = remoteUrl.concat(process.env['gh_PAT'].trim(), '@');
+      remoteUrl = remoteUrl.concat(process.env['GH_PAT'].trim(), '@');
     } else if (process.env['GITHUB_TOKEN']) {
       core.debug('Use Github Token to manage repository(not pass when a workflow is triggered from a forked repository)');
       remoteUrl = remoteUrl.concat('x-access-token:', process.env['GITHUB_TOKEN'].trim(), '@');
