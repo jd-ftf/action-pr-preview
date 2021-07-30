@@ -22,6 +22,7 @@ jobs:
         uses: ./
         with:
           docs_dir: docs/
+          repo: jd-ftf/pr-preview
         env:
           GH_PAT: ${{ secrets.PAT }}
 
