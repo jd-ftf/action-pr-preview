@@ -23,7 +23,6 @@ jobs:
         with:
           docs_dir: docs/
           repo: jd-ftf/pr-preview
-          store_num: 1
         env:
           GH_PAT: ${{ secrets.PAT }}
 
