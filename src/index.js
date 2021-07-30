@@ -11,11 +11,12 @@ async function run () {
   try {
     const domain = core.getInput('domain') || 'github.com';
     const repo = core.getInput('repo') || process.env['GITHUB_REPOSITORY'];
+    const currentRepo = process.env['GITHUB_REPOSITORY'];
     const targetBranch = core.getInput('target_branch') || 'gh-pages';
     const author = core.getInput('author') || 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>';
     const commiter = core.getInput('commiter') || 'GitHub <noreply@github.com>';
     const docsDir = core.getInput('docs_dir');
-    const previewDir = core.getInput('preview_dir') || (process.env['GH_PAT'] ? `preview/${repo.split('/')[1]}/` : 'preview/');
+    const previewDir = core.getInput('preview_dir') || (process.env['GH_PAT'] ? `preview/${currentRepo.split('/')[1]}/` : 'preview/');
     const storeNum = parseInt(core.getInput('store_num'));
     const verbose = core.getBooleanInput('verbose');
     const prId = github.context.payload.number;
