@@ -11019,7 +11019,7 @@ async function run () {
     const author = core.getInput('author') || 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>';
     const commiter = core.getInput('commiter') || 'GitHub <noreply@github.com>';
     const docsDir = core.getInput('docs_dir');
-    const previewDir = core.getInput('preview_dir') || (process.env['GH_PAT'] ? `preview/${repo}/` : 'preview/');
+    const previewDir = core.getInput('preview_dir') || (process.env['GH_PAT'] ? `preview/${repo.split('/')[1]}/` : 'preview/');
     const storeNum = parseInt(core.getInput('store_num'));
     const verbose = core.getBooleanInput('verbose');
     const prId = github.context.payload.number;
