@@ -24,5 +24,5 @@ jobs:
           docs_dir: docs/
           repo: jd-ftf/pr-preview
         env:
-          GH_PAT: ${{ secrets.PAT }}
+          GH_PAT: ${{ env.prPreview.PAT }}
 
