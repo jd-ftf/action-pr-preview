@@ -11068,8 +11068,10 @@ async function run () {
       let expiredNum = prId - storeNum;
       if (expiredNum > 0) {
         while (expiredNum > 0) {
-          core.info(`remove ${previewDir}${expiredNum} directory`);
-          remove(`${previewDir}${expiredNum}`);
+          if (fs.existsSync(path.join(tmpDir, `${previewDir}${expiredNum}`))) {
+            core.info(`remove ${previewDir}${expiredNum} directory`);
+            remove(`${previewDir}${expiredNum}`);
+          }
           expiredNum--;
         }
         core.info(`remove expired ${prId - storeNum} directories`);
